@@ -3,12 +3,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
+const bp = require("body-parser");
+const cors = require("cors");
 
 const feedRoutes = require("./routes/feed");
-
-const bp = require("body-parser");
-
-const cors = require("cors");
+const authRoutes = require("./routes/auth");
 
 const app = express();
 
@@ -42,6 +41,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(cors());
 
 app.use("/feed", feedRoutes);
+app.use("/auth", authRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
